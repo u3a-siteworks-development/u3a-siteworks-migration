@@ -1,2 +1,3 @@
 # u3a-siteworks-migration
-A migration plugin for u3a sitebuilder sites
+plugin to migrate sites from sitebulder
+This is a replacement for u3amigrationB. It should handle line breaks better
