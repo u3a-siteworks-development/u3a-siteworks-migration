@@ -3,7 +3,7 @@
 Plugin Name: u3a Siteworks Migration 
 Plugin URI: https://u3awpdev.org.uk/
 Description: Provides facility to migrate html files from sitebuilder
-Version: 1.2.5
+Version: 1.2.6
 Author: Camilla Jordan, Nick Talbott, u3aWPdev team
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
