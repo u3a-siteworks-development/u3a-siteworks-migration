@@ -83,9 +83,10 @@ function addgroups()
         $missingfile = fopen(WP_CONTENT_DIR . "/migration/missing.txt", "a") or die("Unable to open file!");
         fwrite($missingfile, $missing);
         fclose($missingfile);
-        echo ("Groups done with the following missing images and files\n" . $missing);
-    } else {
-        echo ("Groups done");
+// NT - don't echo to screen as it triggers "headers already sent" error        
+//        echo ("Groups done with the following missing images and files\n" . $missing);
+//    } else {
+//        echo ("Groups done");
     }
 }
 
@@ -138,9 +139,10 @@ function addevents()
         $missingfile = fopen(WP_CONTENT_DIR . "/migration/missing.txt", "a") or die("Unable to open file!");
         fwrite($missingfile, $missing);
         fclose($missingfile);
-        echo ("Events done with the following missing images and files\n" . $missing);
-    } else {
-        echo ("Events done");
+// NT - don't echo to screen as it triggers "headers already sent" error        
+//        echo ("Events done with the following missing images and files\n" . $missing);
+//    } else {
+//        echo ("Events done");
     }
 }
 

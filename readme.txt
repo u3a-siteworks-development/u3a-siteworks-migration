@@ -1,6 +1,6 @@
 === u3a-siteworks-migration ===
 Requires at least: 5.9
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 5.9
 Requires PHP: 7.3
 License: GPLv2 or later
@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.6 =
+* Fix "Headers already sent" message at end of migration
 = 1.2.5 =
 * Bug 948 - Remove regex that tried to handle { ... } conversion within <p> tags.
 * Add JavaScript to disable the Migrate button once form has been submitted
