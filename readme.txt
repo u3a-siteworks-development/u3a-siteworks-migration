@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.7 =
+* Clarify display of admin form
 = 1.2.6 =
 * Fix "Headers already sent" message at end of migration
 = 1.2.5 =

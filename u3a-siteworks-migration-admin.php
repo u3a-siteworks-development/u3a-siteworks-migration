@@ -34,43 +34,75 @@ function u3a_show_migrate_menu()
 END;
     }
 
+    // Form components
+
+    $submit_button = <<< END
+
+    <p class="submit">
+    <input type="submit" name="submit" id="submit" class="button button-primary button-large" value="Migrate Selected Items">
+    </p>
+    <script>
+    // disable when clicked
+    var sb = document.getElementById('submit');
+    sb.addEventListener('click', function(event) { 
+    setTimeout(function () {
+        event.target.disabled = true;
+        }, 0);
+    });
+    </script>
+END;
+
+    $import_form = <<< END
+
+    <form method="POST" action="admin-post.php">
+    <input type="hidden" name="action" value="u3a_do_migration">
+    
+    <p><label for="importgroups">Import Groups</label>
+    <input type="checkbox" id="importgroups" name="importgroups" value="1" checked></p>
+    
+    <p><label for="importevents">Import Events</label>
+    <input type="checkbox" id="importevents" name="importevents" value="1" checked></p>
+    
+    <p><label for="importothers">Import other content</label>
+    <input type="checkbox" id="importothers" name="importothers" value="1" checked></p>
+    
+    <p><label for="importmedia">Download Media while migrating?</label>
+    <input type="checkbox" id="importmedia" name="importmedia" value="1" checked></p>
+    
+    $submit_button
+    </form>
+END;
+
     // Display source name or prompt for upload
 
     $import_source = '';
+    $import_title = '';
     $prompt = 'Select a Site Builder export file';
+    $import_btn_text = "Upload zip file";
     if (file_exists(WP_CONTENT_DIR . "/migration/extras.xml")) {
         $extras = simplexml_load_file(WP_CONTENT_DIR . "/migration/extras.xml");
         $name = $extras->xpath('section[@id="sitename"]/name');
         $sitename = (string) $name[0];
         $sitename = htmlspecialchars_decode($sitename); // anticipate the ampersand!
-        $import_source = "<h3>Importing from Site Builder export file for <strong>$sitename</strong></h3>";
+        $import_title = "<h3>Importing from Site Builder export file for <strong>$sitename</strong></h3>";
+        $import_btn_text = "Upload new zip file";
         $prompt = 'Select a different Site Builder export file';
+    } else {
+        $import_form = '';  // no import form shown unless contents present in migration folder
     }
-    $import_source .= <<< END
+    $import_source = <<< END
         <form method="POST" action="admin-post.php" enctype="multipart/form-data">
         <input type="hidden" name="action" value="u3a_upload_migration_zip">
-        <p><label for="zipfile">$prompt</label><br>
-        <input type="file" name="zipfile" id="zipfile" accept="application/x-zip"></p>
-        <p><input type="submit" class="button button-primary button-large" value="Upload zip file" name="upload"></p>
+        <h2><label for="zipfile">$prompt</label></h2>
+        <p><input type="file" name="zipfile" id="zipfile" accept="application/x-zip"></p>
+        <p><input type="submit" class="button button-primary button-large" value="$import_btn_text" name="upload"></p>
         </form>
+        <hr style="margin-top:10px;margin-bottom:10px;">
 END;
 
-    $submit_button = <<< END
-<p class="submit">
-<input type="submit" name="submit" id="submit" class="button button-primary button-large" value="Migrate Selected Items">
-</p>
-<script>
-// disable when clicked
-var sb = document.getElementById('submit');
-sb.addEventListener('click', function(event) { 
-setTimeout(function () {
-    event.target.disabled = true;
-    }, 0);
-});
-</script>
-END;
 
-    // Display Amdin Page
+
+    // Display Admin Page
 
     echo <<<END
 <div class="wrap">
@@ -79,25 +111,9 @@ $status_text
 
 $import_source
 
-<hr>
+$import_title
 
-<form method="POST" action="admin-post.php">
-<input type="hidden" name="action" value="u3a_do_migration">
-
-<p><label for="importgroups">Import Groups</label>
-<input type="checkbox" id="importgroups" name="importgroups" value="1" checked></p>
-
-<p><label for="importevents">Import Events</label>
-<input type="checkbox" id="importevents" name="importevents" value="1" checked></p>
-
-<p><label for="importothers">Import other content</label>
-<input type="checkbox" id="importothers" name="importothers" value="1" checked></p>
-
-<p><label for="importmedia">Download Media while migrating?</label>
-<input type="checkbox" id="importmedia" name="importmedia" value="1" checked></p>
-
-$submit_button
-</form>
+$import_form
 
 </div>
 
