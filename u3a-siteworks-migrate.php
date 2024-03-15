@@ -153,9 +153,8 @@ function addotherpages()
     $logtext = "";
     $missing = "";
     //obtains array of page xml files from nongroups directory
-    $pages = scandir(WP_CONTENT_DIR . "/migration/nongroups");
-    array_splice($pages, 0, 2);
-    $num = count($pages);
+    $pages = array_diff(scandir(WP_CONTENT_DIR . "/migration/nongroups"), array('..', '.'));
+
     //code for testing a particular page
 /*     $page=new page(WP_CONTENT_DIR ."/migration/nongroups/groups.xml","page","");
          $page->process("");
@@ -163,17 +162,17 @@ function addotherpages()
         echo("done");
         exit; */
 
-    for ($i = 0; $i < $num; $i++) {
-        $page = new page(WP_CONTENT_DIR . "/migration/nongroups/" . $pages[$i], "page", "");
-        error_log("processing other page: ". $pages[$i]);
+    foreach ($pages as $currentPage) {
+        error_log("processing other page: ". $currentPage);
+        $page = new page(WP_CONTENT_DIR . "/migration/nongroups/" . $currentPage, "page", "");
         $page->process("");
         $page->addpage();
         if (!empty($page->logtext)) {
-            $logtext .= "Error in " . $pages[$i] . "\n. Details " . $page->logtext . "\n";
+            $logtext .= "Error in " . $currentPage . "\n. Details " . $page->logtext . "\n";
         }
-        $logtext .= $pages[$i] . " processed\n";
+        $logtext .= $currentPage . " processed\n";
         if (!empty($page->missing)) {
-            $missing .= "Missing files on page " . $pages[$i] . $page->missing . "\n";
+            $missing .= "Missing files on page " . $currentPage . $page->missing . "\n";
         }
     }
     u3a_migration_notices();

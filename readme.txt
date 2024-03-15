@@ -1,6 +1,6 @@
 === u3a-siteworks-migration ===
 Requires at least: 5.9
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 5.9
 Requires PHP: 7.3
 License: GPLv2 or later
@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.8 =
+* Fix error scanning for files in migration folder if filename starts with '-'
 = 1.2.7 =
 * Clarify display of admin form
 = 1.2.6 =
