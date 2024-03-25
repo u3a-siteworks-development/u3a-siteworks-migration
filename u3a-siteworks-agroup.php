@@ -140,9 +140,8 @@ class agroup
             //file not found so use defaults and message added to $missing
             $groupcontent = "";
             $this->email = "";
-            $notfound = "xml file for " . sanitize_text_field($this->name) . " not found\n";
+            $notfound = "xml group page file for " . sanitize_text_field($this->name) . " not found\n";
             $this->missing .= $notfound;
-            //echo("xml file for ".sanitize_text_field($this->name)." not found\n");
         }
 
         $groupcontent = preparetoadd($groupcontent);

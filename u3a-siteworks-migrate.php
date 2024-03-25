@@ -68,8 +68,8 @@ function addgroups()
         $thisgroup = new agroup($name, $day, $time, $frequency, $status, $file, $pg, $fname);
         $thisgroup->addcontact($contactname, $contactemail);
         $thisgroup->addgroup();
-        if (!empty($missing . $thisgroup->missing)) {
-            $missing .= "Missing files in " . $name . "pages " . $thisgroup->missing;
+        if (!empty($thisgroup->missing)) {
+            $missing .= "Missing files in " . $name . " - " . $thisgroup->missing;
         }
 
         if (!empty($thisgroup->logtext)) {

@@ -153,7 +153,7 @@ class page
                         $image = new media($img, $caption, $details);
                         $picid = $image->importmedia($details);
                         if ($picid == -1) {
-                            $this->missing .= "(Missing image" . $img . ")\n";
+                            $this->missing .= "(Missing image: " . $img . ")\n";
                         } else {
                             $imgstr = $image->filename;
                             $imgref = $this->preurl . $imgstr;
