@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.9 =
+* Fix issue reporting missing group files in the "Missing files" document.
 = 1.2.8 =
 * Fix error scanning for files in migration folder if filename starts with '-'
 = 1.2.7 =
