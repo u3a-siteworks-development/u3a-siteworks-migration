@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.10 =
+* Scans zip file on upload to check <fname> content for misplaced tags (Site Builder export bug)
 = 1.2.9 =
 * Fix issue reporting missing group files in the "Missing files" document.
 = 1.2.8 =
