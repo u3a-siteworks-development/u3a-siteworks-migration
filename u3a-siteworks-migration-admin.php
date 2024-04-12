@@ -33,6 +33,16 @@ function u3a_show_migrate_menu()
         </p></div>
 END;
     }
+    if ($status == "99") {
+        $message = get_transient('u3a_fname_errormsg');
+        delete_transient('u3a_fname_errormsg');
+        $status_text = <<< END
+        <div class="notice notice-error is-dismissible inline">
+        <p><b>Migration issue with tags in fname found</b></p>
+        $message
+        </div>
+END;
+    }
 
     // Form components
 
@@ -151,7 +161,43 @@ function u3a_upload_migration_zip()
         }
     }
 
+    // Check xml files in allgoups and nongoups folders for <fname> bug
+    $fnameErrors = array();
+    foreach (glob($migrationFolder . '/allgroups/*.xml') as $xmlfile) {
+        $contents = file_get_contents($xmlfile);
+        preg_match_all('/<fname>.*?<\/fname>/', $contents, $matches);
+
+        foreach ($matches[0] as $match) {
+            if (preg_match('/<\/?[ib]>/', $match)) {
+                $fnameErrors[] = $xmlfile;
+                $fnameErrors[] = $match;
+            }
+        }
+    }
+    foreach (glob($migrationFolder . '/nongroups/*.xml') as $xmlfile) {
+        $contents = file_get_contents($xmlfile);
+        preg_match_all('/<fname>.*?<\/fname>/', $contents, $matches);
+        foreach ($matches[0] as $match) {
+            if (preg_match('/<\/?[ib]>/', $match)) {
+                $fnameErrors[] = $xmlfile;
+                $fnameErrors[] = $match;
+            }
+        }
+    }
+
+    // If we have errors, save as transient and set status value
+    if (count($fnameErrors)) {
+        $fnameErrorMsg = '';
+        foreach ($fnameErrors as $errorline) {
+            $fnameErrorMsg .= '<p>' . htmlentities($errorline) . '</p>';
+        }
+        set_transient('u3a_fname_errormsg', $fnameErrorMsg);
+        wp_redirect(admin_url('admin.php?page=u3a-migrate-menu&status=99'));
+        exit;
+    }
+
     wp_redirect(admin_url('admin.php?page=u3a-migrate-menu'));
+    
 }
 
 // Add function to process the Migration form submission
