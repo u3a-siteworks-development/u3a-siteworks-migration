@@ -138,7 +138,7 @@ class media
     }
 
 
-    $this->caption = str_replace(" ", "-", $this->caption);
+    //NT not required. $this->caption = str_replace(" ", "-", $this->caption);
 
     $fileFound = false;
     if ($this->img_source_URL && $this->UR_exists($this->img)) $fileFound = true;
@@ -160,7 +160,7 @@ class media
       $wp_filetype = wp_check_filetype($this->filename, null);
       $attachment = array(
         'post_mime_type' => $wp_filetype['type'],
-        'post_title' => sanitize_file_name($this->filename),
+        'post_title' => sanitize_text_field($this->caption),
         'post_excerpt' => sanitize_text_field($this->caption),
         'post_content' => sanitize_text_field($details),
         'post_status' => 'inherit'
