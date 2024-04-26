@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.13 =
+* When migration is complete, only show link to Missing Files if there is content to show
 = 1.2.12 =
 * Scans zip file on upload to check <contact> content for misplaced tags (Site Builder export bug)
 = 1.2.11 =

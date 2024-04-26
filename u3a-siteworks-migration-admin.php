@@ -25,11 +25,18 @@ function u3a_show_migrate_menu()
     if ($status == "1") {
         $missing_link = content_url('/migration/missing.txt');
         $log_link = content_url('/migration/migrationlog.txt');
+        // only show missing files link if the file has content
+        $missingFileSize = filesize(WP_CONTENT_DIR . "/migration/missing.txt");
+        if ($missingFileSize > 0) {
+            $missingText = '<a href="' . $missing_link . '" target="_blank">Missing files</a>';
+        } else {
+            $missingText = 'No missing files';
+        }
         $status_text = <<< END
         <div class="notice notice-error is-dismissible inline">
-        <p>Migration Completed &nbsp; - &nbsp; 
+        <p><b>Migration Completed</b> &nbsp; - &nbsp; 
         <a href="$log_link" target="_blank">Migration log</a> &nbsp;
-        <a href="$missing_link" target="_blank">Missing files</a>
+        $missingText
         </p></div>
 END;
     }
