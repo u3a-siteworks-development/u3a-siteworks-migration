@@ -218,6 +218,40 @@ function u3a_upload_migration_zip()
         }
     }
 
+    // Check for STX character in xml files 
+
+    foreach (glob($migrationFolder . '/allgroups/*.xml') as $xmlfile) {
+        $contents = file($xmlfile);
+        $lc = 1;
+        foreach ($contents as $line) {
+            if (strstr($line, chr(2))) {
+                $fnameErrors[] = $xmlfile;
+                $fnameErrors[] = "STX found in line $lc";
+            }
+            $lc++;
+        }
+    }
+    foreach (glob($migrationFolder . '/nongroups/*.xml') as $xmlfile) {
+        $contents = file($xmlfile);
+        $lc = 1;
+        foreach ($contents as $line) {
+            if (strstr($line, chr(2))) {
+                $fnameErrors[] = $xmlfile;
+                $fnameErrors[] = "STX found in line $lc";
+            }
+            $lc++;
+        }
+    }
+    $xmlfile = $migrationFolder . '/eventlist.xml';
+    $contents = file($xmlfile);
+    $lc = 1;
+    foreach ($contents as $line) {
+        if (strstr($line, chr(2))) {
+            $fnameErrors[] = $xmlfile;
+            $fnameErrors[] = "STX found in line $lc";
+        }
+        $lc++;
+    }
 
     // If we have errors, save as transient and set status value
     if (count($fnameErrors)) {

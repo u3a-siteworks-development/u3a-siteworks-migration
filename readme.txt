@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.14 =
+* Add check for STX character (0x02) in files on zip file upload.
 = 1.2.13 =
 * When migration is complete, only show link to Missing Files if there is content to show
 = 1.2.12 =
