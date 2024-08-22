@@ -1,6 +1,6 @@
 === u3a-siteworks-migration ===
 Requires at least: 5.9
-Tested up to: 6.5
+Tested up to: 6.6
 Stable tag: 5.9
 Requires PHP: 7.3
 License: GPLv2 or later
@@ -13,6 +13,8 @@ Site Builder import
 Imports Site Builder XML files into a WordPress site which has the SiteWorks core plugin installed
 
 == Changelog ==
+= 1.2.15 =
+* Add mage Post ID to the markup for imported images.
 = 1.2.14 =
 * Add check for STX character (0x02) in files on zip file upload.
 = 1.2.13 =
