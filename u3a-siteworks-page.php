@@ -157,10 +157,10 @@ class page
                         } else {
                             $imgstr = $image->filename;
                             $imgref = $this->preurl . $imgstr;
-                            $imgtext .= '<!-- wp:image {"className":"size-thumbnail", "linkDestination":"media"} -->';
+                            $imgtext .= '<!-- wp:image {"id":' . $picid . ', "className":"size-thumbnail", "linkDestination":"media"} -->';
                             $imgtext .= '<figure class="wp-block-image size-thumbnail">';
                             $imgtext .= '<a href="' . $imgref . '" alt=""/>';
-                            $imgtext .= '<img src="' . $imgref . '" alt=""/></a>';
+                            $imgtext .= '<img src="' . $imgref . '" alt="" class="wp-image-' .$picid . '"/></a>';
                             $imgtext .= '<figcaption class="wp-element-caption">' . $caption;
                             $imgtext .= '</figcaption></figure><!-- /wp:image -->';
                             $this->imgtext .= $imgtext;
